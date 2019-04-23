@@ -17,6 +17,18 @@ Optional features we are including:
 *multiple levels
 '''
 
+'''
+04/22/19
+- differentiate levels with different enemies/powers/collectibles 
+- thoughts on platforms / idk how long we could make each round without scrolling / maybe just make everything uber small?
+- being able to choose your avatar or which basketball team member you want to be (if we keep basketball)
+- thoughts on overall final four/march madness theme
+  - make the final "door" a hoop
+  - after x amount of levels, you win the championship 
+  - each level is a different team we beat
+  - maybe wouldn't have the ability to choose the level at the beginning
+'''
+
 import pygame
 import gamebox
 import random
