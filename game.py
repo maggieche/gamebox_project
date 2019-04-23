@@ -39,6 +39,14 @@ background = gamebox.from_image(400, 300, 'https://auburnuniforms.com/wp-content
                                           '-Tournament-Court-round-2-840x469.png')
 background.height = 750
 
+hoop = gamebox.from_image(200,50,'https://cdn11.bigcommerce.com/s-847qwk2ikf/images/stencil/1280x1280/'
+                                 'products/135/645/Black_High_Res_Master768__80118.1476101510.png')
+hoop.scale_by(0.1)
+
+#keeping score based on collecting items
+score = 0
+
+
 # creating characters
 kyle = gamebox.from_image(400, 560, 'https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/'
                                     'players/full/4065730.png')
@@ -47,7 +55,20 @@ kihei = gamebox.from_image(200, 560,
                            'https://a.espncdn.com/i/headshots/mens-college-basketball/players/full/4395677.png')
 kihei.height = 30
 
-# creating a game screen full of obstacles
+# creating coins to collect
+coins = [
+    gamebox.from_image(350,470,'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                               '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(400,470,'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                               '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(450,470,'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                               '1035px-Basketball_Clipart.svg.png')
+]
+for coin in coins:
+    coin.scale_by(.02)
+
+#shot clock
+time = 30
 
 # level 1
 # all platforms are 10 pixels tall & 150 pixels apart (height wise)
@@ -118,12 +139,15 @@ level = False
 
 
 def tick(keys):
-    global level, level_1, level_2, level_3
+    global level, level_1, level_2, level_3, score, time
 
     if not level:
         # create a menu screen with different levels to choose
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 150, "Welcome to our Game! Press 'Space' to Start.", 50, 'black'))
+        camera.draw(gamebox.from_text(400, 150, "Welcome to our Game!", 50, 'black'))
+        camera.draw(gamebox.from_text(400,210,"How to play:",50,'black'))
+        camera.draw(gamebox.from_text(400,270,"The goal of the game is to reach the basketball net together",30,'black'))
+        camera.draw(gamebox.from_text(400,320,"before the shot clock runs out, collecting as many basketballs as possible.",30,'black'))
         if pygame.K_SPACE in keys:
             level = 1
         # # level logos-- eventually could be a picture not a color gamebox
@@ -143,6 +167,7 @@ def tick(keys):
     if level == 1:
         camera.clear('white')
         camera.draw(background)
+        camera.draw(hoop)
 
         # kyle movement
         kylemove(keys, 1)
@@ -158,16 +183,45 @@ def tick(keys):
         kihei.speedy += 0.75
         kihei.move_speed()
 
+        #collecting
+        for coin in coins:
+            if kyle.touches(coin) or kihei.touches(coin):
+                score += 10
+                coins.remove(coin)
+        #display score
+        camera.draw(gamebox.from_text(730,50,'Score: '+str(score)+'',40,'black'))
+
+        #finish level
+        if kyle.touches(hoop) and kihei.touches(hoop):
+            level = 1.5
+
         # drawing
         for platform in platforms_level1:
             camera.draw(platform)
+        for coin in coins:
+            camera.draw(coin)
         camera.draw(kyle)
         camera.draw(kihei)
 
+        #timer
+        time -= 0.0167
+        camera.draw(gamebox.from_text(100,50,'Shot Clock:'+str(int(time))+'',40,'black'))
+        if time == 0:
+            gamebox.pause()
+            camera.draw(gamebox.from_text(400,300,'GAME OVER',60,'red',True))
+
+    if level == 1.5:
+        camera.clear('white')
+        camera.draw(gamebox.from_text(400,150,'Level 1 Complete! Total Score is: '+str(score)+'',40,'black'))
+        camera.draw(gamebox.from_text(400,200,'Press Space to Continue to Level 2',40,'black'))
+        if pygame.K_SPACE in keys:
+            level = 2
     if level == 2:
         camera.clear('yellow')
+        camera.draw(gamebox.from_text(400,150,'Level Not Complete',60,'red'))
     if level == 3:
         camera.clear('black')
+        camera.draw(gamebox.from_text(400, 150, 'Level Not Complete', 60, 'red'))
 
     camera.display()
 
