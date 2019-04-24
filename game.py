@@ -1,4 +1,5 @@
-# gamebox_project
+# Maggie Che, mc8ew
+# Cathryn Palmer, cep7pa
 
 '''basic idea: Super Mario Bros meets FireBoy and WaterGirl
 -interacting with objects and villains
@@ -15,17 +16,15 @@ Optional features we are including:
 *collectibles (specific to each of the two characters)
 *two players simultaneously
 *multiple levels
-'''
 
-'''
-04/22/19
+updated ideas (4/22/19):
 - differentiate levels with different enemies/powers/collectibles 
-- thoughts on platforms / idk how long we could make each round without scrolling / maybe just make everything uber small?
-- being able to choose your avatar or which basketball team member you want to be (if we keep basketball)
-- thoughts on overall final four/march madness theme
+- would have to make platforms/players/collectibles smaller since we're not scrolling
+- being able to choose your avatar or which basketball team member you want to be (if time allows)
+- overall final four/march madness theme
   - make the final "door" a hoop
   - after x amount of levels, you win the championship 
-  - each level is a different team we beat
+  - each level is a different team
   - maybe wouldn't have the ability to choose the level at the beginning
 '''
 
