@@ -1,5 +1,5 @@
-#Cathryn Palmer cep7pa
-#Maggie Che mc8ew
+# Cathryn Palmer cep7pa
+# Maggie Che mc8ew
 # gamebox_project
 
 '''basic idea: Super Mario Bros meets FireBoy and WaterGirl
@@ -36,6 +36,9 @@ import gamebox
 import random
 
 camera = gamebox.Camera(800, 600)
+
+starting_screen = gamebox.from_image(400, 300, 'https://s3media.247sports.com/Uploads/Assets/96/822/8822096.jpg')
+starting_screen.height = 600
 
 background = gamebox.from_image(400, 300, 'https://auburnuniforms.com/wp-content/uploads/2019/03/2019-NCAA'
                                           '-Tournament-Court-round-2-840x469.png')
@@ -146,10 +149,15 @@ def tick(keys):
     if not level:
         # create a menu screen with different levels to choose
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 150, "REDEMPTION TOUR", 50, 'black'))
-        camera.draw(gamebox.from_text(400,210,"How to play:",50,'black'))
-        camera.draw(gamebox.from_text(400,270,"The goal of the game is to reach the basketball net together",30,'black'))
-        camera.draw(gamebox.from_text(400,320,"before the shot clock runs out, collecting as many basketballs as possible.",30,'black'))
+        camera.draw(starting_screen)
+        camera.draw(gamebox.from_text(400, 300, "REDEMPTION TOUR", 50, 'orange'))
+        camera.draw(gamebox.from_text(400, 360, "How to play:", 50, 'orange'))
+        camera.draw(gamebox.from_text(400, 420, "The goal of the game is to reach the basketball net together", 30,
+                                      'orange'))
+        camera.draw(gamebox.from_text(400, 470, "before the shot clock runs out, collecting as many basketballs as "
+                                                "possible.", 30, 'orange'))
+        camera.draw(gamebox.from_text(400, 530, "Press Space to start.", 30, 'orange'))
+
         if pygame.K_SPACE in keys:
             level = 1
         # # level logos-- eventually could be a picture not a color gamebox
@@ -207,20 +215,20 @@ def tick(keys):
 
         #timer
         time -= 0.0167
-        camera.draw(gamebox.from_text(100,50,'Shot Clock:'+str(int(time))+'',40,'black'))
+        camera.draw(gamebox.from_text(100, 50, 'Shot Clock:'+str(int(time))+'', 40, 'black'))
         if time == 0:
             gamebox.pause()
-            camera.draw(gamebox.from_text(400,300,'GAME OVER',60,'red',True))
+            camera.draw(gamebox.from_text(400, 300, 'GAME OVER', 60, 'red', True))
 
     if level == 1.5:
         camera.clear('white')
-        camera.draw(gamebox.from_text(400,150,'Level 1 Complete! Total Score is: '+str(score)+'',40,'black'))
-        camera.draw(gamebox.from_text(400,200,'Press Space to Continue to Level 2',40,'black'))
+        camera.draw(gamebox.from_text(400, 150, 'Level 1 Complete! Total Score is: '+str(score)+'', 40, 'black'))
+        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 2', 40, 'black'))
         if pygame.K_SPACE in keys:
             level = 2
     if level == 2:
         camera.clear('yellow')
-        camera.draw(gamebox.from_text(400,150,'Level Not Complete',60,'red'))
+        camera.draw(gamebox.from_text(400, 150, 'Level Not Complete', 60, 'red'))
     if level == 3:
         camera.clear('black')
         camera.draw(gamebox.from_text(400, 150, 'Level Not Complete', 60, 'red'))
