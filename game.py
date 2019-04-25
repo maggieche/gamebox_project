@@ -1,5 +1,6 @@
-# Maggie Che, mc8ew
-# Cathryn Palmer, cep7pa
+#Cathryn Palmer cep7pa
+#Maggie Che mc8ew
+# gamebox_project
 
 '''basic idea: Super Mario Bros meets FireBoy and WaterGirl
 -interacting with objects and villains
@@ -16,16 +17,17 @@ Optional features we are including:
 *collectibles (specific to each of the two characters)
 *two players simultaneously
 *multiple levels
+'''
 
-
-updated ideas (4/23/19):
-- differentiate levels with different enemies/powers/collectibles
-- would have to make platforms/players/collectibles smaller since we're not scrolling
-- being able to choose your avatar or which basketball team member you want to be (if time allows)
-- overall final four/march madness theme
+'''
+04/22/19
+- differentiate levels with different enemies/powers/collectibles 
+- thoughts on platforms / idk how long we could make each round without scrolling / maybe just make everything uber small?
+- being able to choose your avatar or which basketball team member you want to be (if we keep basketball)
+- thoughts on overall final four/march madness theme
   - make the final "door" a hoop
-  - after x amount of levels, you win the championship
-  - each level is a different team
+  - after x amount of levels, you win the championship 
+  - each level is a different team we beat
   - maybe wouldn't have the ability to choose the level at the beginning
 '''
 
@@ -43,17 +45,17 @@ hoop = gamebox.from_image(200,50,'https://cdn11.bigcommerce.com/s-847qwk2ikf/ima
                                  'products/135/645/Black_High_Res_Master768__80118.1476101510.png')
 hoop.scale_by(0.1)
 
-# keeping score based on collecting items
+#keeping score based on collecting items
 score = 0
 
 
 # creating characters
 kyle = gamebox.from_image(400, 560, 'https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/'
                                     'players/full/4065730.png')
-kyle.height = 30
+kyle.height = 50
 kihei = gamebox.from_image(200, 560,
                            'https://a.espncdn.com/i/headshots/mens-college-basketball/players/full/4395677.png')
-kihei.height = 30
+kihei.height = 50
 
 # creating coins to collect
 coins = [
@@ -67,7 +69,7 @@ coins = [
 for coin in coins:
     coin.scale_by(.02)
 
-# shot clock
+#shot clock
 time = 30
 
 # level 1
@@ -92,7 +94,6 @@ platforms_level1 = [
 
 ]
 
-
 # function for player 1 motion (to decrease repetition)
 def kylemove(keys, platformlevel):
     if pygame.K_LEFT in keys:
@@ -112,7 +113,6 @@ def kylemove(keys, platformlevel):
         #     for platform in platforms_level3:
         #         if kyle.bottom_touches(platform):
         #             kyle.speedy = -20
-
 
 # function for player 2 motion
 def kiheimove(keys, platformlevel):
@@ -134,21 +134,22 @@ def kiheimove(keys, platformlevel):
         #         if kihei.bottom_touches(platform):
         #             kihei.speedy = -20
 
-
 level = False
+# level_1 = gamebox.from_color(200, 400, 'yellow', 60, 60)
+# level_2 = gamebox.from_color(400, 400, 'blue', 60, 60)
+# level_3 = gamebox.from_color(600, 400, 'pink', 60, 60)
+
 
 def tick(keys):
-    global level, score, time
+    global level, level_1, level_2, level_3, score, time
 
     if not level:
         # create a menu screen with different levels to choose
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 150, "Welcome to our Game!", 50, 'black'))
-        camera.draw(gamebox.from_text(400,210,"How to play:", 50, 'black'))
-        camera.draw(gamebox.from_text(400,270,"The goal of the game is to reach the basketball net together", 30,
-                                      'black'))
-        camera.draw(gamebox.from_text(400,320,"before the shot clock runs out, collecting as many basketballs as "
-                                              "possible.", 30, 'black'))
+        camera.draw(gamebox.from_text(400, 150, "REDEMPTION TOUR", 50, 'black'))
+        camera.draw(gamebox.from_text(400,210,"How to play:",50,'black'))
+        camera.draw(gamebox.from_text(400,270,"The goal of the game is to reach the basketball net together",30,'black'))
+        camera.draw(gamebox.from_text(400,320,"before the shot clock runs out, collecting as many basketballs as possible.",30,'black'))
         if pygame.K_SPACE in keys:
             level = 1
         # # level logos-- eventually could be a picture not a color gamebox
@@ -184,15 +185,15 @@ def tick(keys):
         kihei.speedy += 0.75
         kihei.move_speed()
 
-        # collecting
+        #collecting
         for coin in coins:
             if kyle.touches(coin) or kihei.touches(coin):
                 score += 10
                 coins.remove(coin)
-        # display score
-        camera.draw(gamebox.from_text(730, 50, 'Score: '+str(score)+'', 40, 'black'))
+        #display score
+        camera.draw(gamebox.from_text(730,50,'Score: '+str(score)+'',40,'black'))
 
-        # finish level
+        #finish level
         if kyle.touches(hoop) and kihei.touches(hoop):
             level = 1.5
 
@@ -204,22 +205,22 @@ def tick(keys):
         camera.draw(kyle)
         camera.draw(kihei)
 
-        # timer
+        #timer
         time -= 0.0167
-        camera.draw(gamebox.from_text(100, 50, 'Shot Clock:'+str(int(time))+'', 40, 'black'))
+        camera.draw(gamebox.from_text(100,50,'Shot Clock:'+str(int(time))+'',40,'black'))
         if time == 0:
             gamebox.pause()
-            camera.draw(gamebox.from_text(400, 300, 'GAME OVER', 60, 'red', True))
+            camera.draw(gamebox.from_text(400,300,'GAME OVER',60,'red',True))
 
     if level == 1.5:
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 150, 'Level 1 Complete! Total Score is: '+str(score)+'', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 2', 40, 'black'))
+        camera.draw(gamebox.from_text(400,150,'Level 1 Complete! Total Score is: '+str(score)+'',40,'black'))
+        camera.draw(gamebox.from_text(400,200,'Press Space to Continue to Level 2',40,'black'))
         if pygame.K_SPACE in keys:
             level = 2
     if level == 2:
         camera.clear('yellow')
-        camera.draw(gamebox.from_text(400, 150, 'Level Not Complete', 60, 'red'))
+        camera.draw(gamebox.from_text(400,150,'Level Not Complete',60,'red'))
     if level == 3:
         camera.clear('black')
         camera.draw(gamebox.from_text(400, 150, 'Level Not Complete', 60, 'red'))
