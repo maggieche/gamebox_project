@@ -67,10 +67,50 @@ coins = [
     gamebox.from_image(400,470,'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
                                '1035px-Basketball_Clipart.svg.png'),
     gamebox.from_image(450,470,'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
-                               '1035px-Basketball_Clipart.svg.png')
+                               '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(600, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(650, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(700, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(100, 270, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(700, 270, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(500, 270, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(50, 170, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(150, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(100, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(200, 370, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(700, 70, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                 '1035px-Basketball_Clipart.svg.png'),
+    gamebox.from_image(700, 45, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/'
+                                '1035px-Basketball_Clipart.svg.png'),
 ]
 for coin in coins:
     coin.scale_by(.02)
+
+#creating villains
+villains_1 = [
+    gamebox.from_image(400,250,'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/'
+                               '1280px-Purdue_Boilermakers_logo.svg.png'),
+    gamebox.from_image(650,350,'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/'
+                               '1280px-Purdue_Boilermakers_logo.svg.png'),
+    gamebox.from_image(50, 450,
+                       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/'
+                       '1280px-Purdue_Boilermakers_logo.svg.png'),
+    gamebox.from_image(250, 150,
+                       'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/'
+                       '1280px-Purdue_Boilermakers_logo.svg.png'),
+    ]
+for villain in villains_1:
+    villain.scale_by(0.05)
 
 #shot clock
 time = 30
@@ -150,13 +190,15 @@ def tick(keys):
         # create a menu screen with different levels to choose
         camera.clear('white')
         camera.draw(starting_screen)
-        camera.draw(gamebox.from_text(400, 300, "REDEMPTION TOUR", 50, 'orange'))
-        camera.draw(gamebox.from_text(400, 360, "How to play:", 50, 'orange'))
-        camera.draw(gamebox.from_text(400, 420, "The goal of the game is to reach the basketball net together", 30,
+        camera.draw(gamebox.from_text(400, 310, "REDEMPTION TOUR", 50, 'orange'))
+        camera.draw(gamebox.from_text(400, 350,"Cathryn Palmer cep7pa & Maggie Che mc8ew",30,'orange'))
+        camera.draw(gamebox.from_text(400, 390, "How to play:", 50, 'orange'))
+        camera.draw(gamebox.from_text(400, 440, "The goal of the game is to reach the basketball net together", 30,
                                       'orange'))
-        camera.draw(gamebox.from_text(400, 470, "before the shot clock runs out, collecting as many basketballs as "
+        camera.draw(gamebox.from_text(400, 480, "before the shot clock runs out, collecting as many basketballs as "
                                                 "possible.", 30, 'orange'))
-        camera.draw(gamebox.from_text(400, 530, "Press Space to start.", 30, 'orange'))
+        camera.draw(gamebox.from_text(400, 520, "Beware the opposing team members.", 30, 'orange'))
+        camera.draw(gamebox.from_text(400, 570, "Press Space to start.", 30, 'orange'))
 
         if pygame.K_SPACE in keys:
             level = 1
@@ -210,15 +252,31 @@ def tick(keys):
             camera.draw(platform)
         for coin in coins:
             camera.draw(coin)
+        for villain in villains_1:
+            camera.draw(villain)
+
         camera.draw(kyle)
         camera.draw(kihei)
 
         #timer
         time -= 0.0167
-        camera.draw(gamebox.from_text(100, 50, 'Shot Clock:'+str(int(time))+'', 40, 'black'))
+        camera.draw(gamebox.from_text(100, 50, 'Shot Clock: '+str(int(time))+'', 40, 'black'))
         if time == 0:
             gamebox.pause()
             camera.draw(gamebox.from_text(400, 300, 'GAME OVER', 60, 'red', True))
+            camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
+
+        #villain movement
+        for villain in villains_1:
+            villain.speedx = 2.5
+            villain.move_speed()
+            for platform in platforms_level1:
+                if villain.right_touches(platform):
+                    villain.x = 0
+            if kyle.touches(villain) or kihei.touches(villain):
+                gamebox.pause()
+                camera.draw(gamebox.from_text(400, 300, 'GAME OVER', 60, 'red', True))
+                camera.draw(gamebox.from_text(400,350,'Final Score was: '+str(score)+'',60,'red'))
 
     if level == 1.5:
         camera.clear('white')
