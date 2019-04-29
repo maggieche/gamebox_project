@@ -101,7 +101,6 @@ for coin in coins_level3:
 purdue = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Purdue_Boilermakers_logo.svg/' \
          '1280px-Purdue_Boilermakers_logo.svg.png'
 villains_1 = [
-    gamebox.from_image(350, 50, purdue),
     gamebox.from_image(250, 150, purdue),
     gamebox.from_image(400, 250, purdue),
     gamebox.from_image(650, 350, purdue),
@@ -113,7 +112,6 @@ for villain in villains_1:
 auburn = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Auburn_Tigers_logo.svg/' \
          '1200px-Auburn_Tigers_logo.svg.png'
 villains_2 = [
-    gamebox.from_image(350, 50, auburn),
     gamebox.from_image(250, 150, auburn),
     gamebox.from_image(400, 250, auburn),
     gamebox.from_image(650, 350, auburn),
@@ -125,7 +123,6 @@ for villain in villains_2:
 texas_tech = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Texas_Tech_Athletics_logo.svg' \
              '/1200px-Texas_Tech_Athletics_logo.svg.png'
 villains_3 = [
-    gamebox.from_image(350, 50, texas_tech),
     gamebox.from_image(250, 150, texas_tech),
     gamebox.from_image(400, 250, texas_tech),
     gamebox.from_image(650, 350, texas_tech),
@@ -190,7 +187,7 @@ platforms_level3 = [
 ]
 
 
-# function for player 1 motion (to decrease repetition)
+'''This function controls player 1's movements'''
 def kylemove(keys, platformlevel):
     if pygame.K_LEFT in keys:
         kyle.x -= 7.5
@@ -211,7 +208,7 @@ def kylemove(keys, platformlevel):
                     kyle.speedy = -15
 
 
-# function for player 2 motion
+'''This function controls player 2's movements'''
 def kiheimove(keys, platformlevel):
     if pygame.K_a in keys:
         kihei.x -= 7.5
@@ -235,6 +232,8 @@ def kiheimove(keys, platformlevel):
 level = False
 
 
+'''This function controls the game play and draws the screen each time it's iterated, which is controlled in a separate
+loop'''
 def tick(keys):
     global level, score, time
 
@@ -301,9 +300,9 @@ def tick(keys):
         # timer
         time -= 0.0167
         camera.draw(gamebox.from_text(100, 50, 'Shot Clock: '+str(int(time))+'', 40, 'black'))
-        if time == 0:
+        if int(time) == 0:
             gamebox.pause()
-            camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Purdue!', 60, 'red', True))
+            camera.draw(gamebox.from_text(400, 300, 'You lost to Purdue!', 60, 'red', True))
             camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
         # villain movement
@@ -314,16 +313,26 @@ def tick(keys):
                 villain.x = 0
             if kyle.touches(villain) or kihei.touches(villain):
                 gamebox.pause()
-                camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Purdue!', 60, 'red', True))
+                camera.draw(gamebox.from_text(400, 300, 'You lost to Purdue!', 60, 'red', True))
                 camera.draw(gamebox.from_text(400, 350, 'Final Score was: '+str(score)+'', 60, 'red'))
 
     if level == 1.5:
+        eliteeight = gamebox.from_image(400, 300, 'https://img.bleacherreport.net/img/images/photos/003/801/562'
+                                                  '/hi-res-675e5b581a8c84aabd34c0c873c66169_crop_north.jpg?h=533'
+                                                  '&w=800&q=70&crop_x=center&crop_y=top')
+        eliteeight.height = 600
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 100, 'Congrats! You\'re moving on to the Final Four!', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 150, 'Total Score is: '+str(score)+'', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 2', 40, 'black'))
+        camera.draw(eliteeight)
+        camera.draw(gamebox.from_text(400, 100, 'You\'re moving on to the Final Four!', 40, 'white'))
+        camera.draw(gamebox.from_text(400, 150, 'Total Score is: '+str(score)+'', 40, 'white'))
+        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 2', 40, 'white'))
         if pygame.K_SPACE in keys:
             level = 2
+            kyle.x = 400
+            kyle.y = 560
+            kihei.x = 200
+            kihei.y = 560
+            time = 30
 
     # level 2
     if level == 2:
@@ -371,9 +380,9 @@ def tick(keys):
         # timer
         time -= 0.0167
         camera.draw(gamebox.from_text(100, 50, 'Shot Clock: ' + str(int(time)) + '', 40, 'black'))
-        if time == 0:
+        if int(time) == 0:
             gamebox.pause()
-            camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Auburn!', 60, 'red', True))
+            camera.draw(gamebox.from_text(400, 300, 'You lost to Auburn!', 60, 'red', True))
             camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
         # villain movement
@@ -384,16 +393,25 @@ def tick(keys):
                 villain.x = 0
             if kyle.touches(villain) or kihei.touches(villain):
                 gamebox.pause()
-                camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Auburn!', 60, 'red', True))
+                camera.draw(gamebox.from_text(400, 300, 'You lost to Auburn!', 60, 'red', True))
                 camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
     if level == 2.5:
+        finalfour = gamebox.from_image(400, 300, 'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iq2aIXlqcVM4/v1/'
+                                                 '1000x-1.jpg')
+        finalfour.height = 600
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 100, 'Congrats! You\'re moving on to the National Championship!', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 150, 'Total Score is: ' + str(score) + '', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 3', 40, 'black'))
+        camera.draw(finalfour)
+        camera.draw(gamebox.from_text(400, 100, 'You\'re moving on to the National Championship!', 40, 'white'))
+        camera.draw(gamebox.from_text(400, 150, 'Total Score is: ' + str(score) + '', 40, 'white'))
+        camera.draw(gamebox.from_text(400, 200, 'Press Space to Continue to Level 3', 40, 'white'))
         if pygame.K_SPACE in keys:
             level = 3
+            kyle.x = 400
+            kyle.y = 560
+            kihei.x = 200
+            kihei.y = 560
+            time = 30
 
     # level 3
     if level == 3:
@@ -441,9 +459,9 @@ def tick(keys):
         # timer
         time -= 0.0167
         camera.draw(gamebox.from_text(100, 50, 'Shot Clock: ' + str(int(time)) + '', 40, 'black'))
-        if time == 0:
+        if int(time) == 0:
             gamebox.pause()
-            camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Texas Tech!', 60, 'red', True))
+            camera.draw(gamebox.from_text(400, 300, 'You lost to Texas Tech!', 60, 'red', True))
             camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
         # villain movement
@@ -454,14 +472,19 @@ def tick(keys):
                 villain.x = 0
             if kyle.touches(villain) or kihei.touches(villain):
                 gamebox.pause()
-                camera.draw(gamebox.from_text(400, 300, 'Sorry! You lost to Texas Tech!', 60, 'red', True))
+                camera.draw(gamebox.from_text(400, 300, 'You lost to Texas Tech!', 60, 'red', True))
                 camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
     # winning
     if level == 3.5:
+        champions = gamebox.from_image(400, 300, 'https://imagesvc.timeincapp.com/v3/fan/image?url=https%3A%2F%2Ffansid'
+                                                 'ed.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2019%2F04%2F11'
+                                                 '41353431.jpeg&c=sc&w=850&h=560')
+        champions.height = 600
         camera.clear('white')
-        camera.draw(gamebox.from_text(400, 100, 'Congrats! You\'re the National Champions!', 40, 'black'))
-        camera.draw(gamebox.from_text(400, 150, 'Total Score is: ' + str(score) + '', 40, 'black'))
+        camera.draw(champions)
+        camera.draw(gamebox.from_text(400, 175, 'You\'re the National Champions!', 60, 'white'))
+        camera.draw(gamebox.from_text(400, 225, 'Total Score is: ' + str(score) + '', 60, 'white'))
 
     camera.display()
 
