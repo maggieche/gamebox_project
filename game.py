@@ -317,9 +317,7 @@ def tick(keys):
                 camera.draw(gamebox.from_text(400, 350, 'Final Score was: '+str(score)+'', 60, 'red'))
 
     if level == 1.5:
-        eliteeight = gamebox.from_image(400, 300, 'https://img.bleacherreport.net/img/images/photos/003/801/562'
-                                                  '/hi-res-675e5b581a8c84aabd34c0c873c66169_crop_north.jpg?h=533'
-                                                  '&w=800&q=70&crop_x=center&crop_y=top')
+        eliteeight = gamebox.from_image(400, 300, 'http://drive.google.com/uc?export=view&id=1wqwgGquyF-IYOSjDWMYQAXJU2PM1ymQD')
         eliteeight.height = 600
         camera.clear('white')
         camera.draw(eliteeight)
@@ -397,8 +395,7 @@ def tick(keys):
                 camera.draw(gamebox.from_text(400, 350, 'Final Score was: ' + str(score) + '', 60, 'red'))
 
     if level == 2.5:
-        finalfour = gamebox.from_image(400, 300, 'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iq2aIXlqcVM4/v1/'
-                                                 '1000x-1.jpg')
+        finalfour = gamebox.from_image(400, 300, 'http://drive.google.com/uc?export=view&id=1RUW-QrwfU_BSH20z_Q76eOeiDNBPLhz7')
         finalfour.height = 600
         camera.clear('white')
         camera.draw(finalfour)
@@ -477,9 +474,7 @@ def tick(keys):
 
     # winning
     if level == 3.5:
-        champions = gamebox.from_image(400, 300, 'https://imagesvc.timeincapp.com/v3/fan/image?url=https%3A%2F%2Ffansid'
-                                                 'ed.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2019%2F04%2F11'
-                                                 '41353431.jpeg&c=sc&w=850&h=560')
+        champions = gamebox.from_image(400, 300, 'http://drive.google.com/uc?export=view&id=1Lz-o4Bcwdf885s7Sq24kSj7O68tkBdEL')
         champions.height = 600
         camera.clear('white')
         camera.draw(champions)
